@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ComponentsCustomUnvisual\ComponentsCustomUnvisual.csproj" />
     <ProjectReference Include="..\ComponentsCustom\ComponentsCustom.csproj" />
   </ItemGroup>
 

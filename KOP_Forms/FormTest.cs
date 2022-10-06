@@ -1,13 +1,6 @@
-﻿using ComponentsCustom;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System;
+using ComponentsCustom;
+using ComponentsCustomUnvisual.HelperModels;
 
 namespace KOP_Forms
 {
@@ -93,6 +86,75 @@ namespace KOP_Forms
         private void buttonSaveStorage_Click(object sender, EventArgs e)
         {
             List<string[,]> datas = new List<string[,]>();
+        }
+
+        private void buttonSaveStorage_Click_1(object sender, EventArgs e)
+        {
+            string fileName = "";
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = dialog.FileName.ToString();
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+            List<string[,]> datas = new List<string[,]>();
+            string[,] data = new string[,] { { "Skalkin", "Egov" }, { "Vorinina", "Guskov" } };
+            datas.Add(data);
+            wordTablesContext.SaveData(fileName, "Документ с таблицами", datas);
+        }
+
+        private void buttonSaveDataChangebleWord_Click(object sender, EventArgs e)
+        {
+            DataClass data = new DataClass();
+            string fileName = "";
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = dialog.FileName.ToString();
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+            wordTableCustom.SaveData<TestData>(new ComponentWordTableConfig<TestData>
+            {
+                WordInfo = new WordInfo
+                {
+                    FileName = fileName,
+                    Title = "2 лаба по КОП"
+                },
+                ColumnsWidth = data.getColumnsWidth(3, 2400),
+                RowsHeight = data.getRowsHeight(5, 1000),
+                Headers = data.GetHeader(3),
+                PropertiesQueue = data.GetHeader(3),
+                ListData = data.GetTests()
+            });
+        }
+
+        private void buttonGistogram_Click(object sender, EventArgs e)
+        {
+            string fileName = "";
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = dialog.FileName.ToString();
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+            List<TestData> data = new List<TestData>();
+
+            data.Add(new TestData { name = "Иван", age = 18, kurs = 1 });
+            data.Add(new TestData { name = "Николай", age = 17, kurs = 1 });
+            data.Add(new TestData { name = "Альберт", age = 19, kurs = 2 });
+            data.Add(new TestData { name = "Глеб", age = 20, kurs = 3 });
+            data.Add(new TestData { name = "Антон", age = 23, kurs = 5 });
+            LocationLegend legend = new LocationLegend();
+            wordGistagram.ReportSaveGistogram(fileName, "Документ с гистограммой", "Студенты", legend, data);
         }
     }
 }
