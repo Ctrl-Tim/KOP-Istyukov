@@ -51,7 +51,7 @@ namespace ComponentsCustomUnvisual
                 gistogramChart.AddLegend((ChartLegendPosition)chartLegendPosition, false);
                 Series seriesFirst = new Series(nameDiagram);
                 // заполняем данными
-                seriesFirst.Bind(list, "name", "age");
+                seriesFirst.Bind(list, "name", "value");
                 // создаём набор данных и добавляем на диаграмму
                 gistogramChart.AddSeries(seriesFirst);
                 document.InsertChart(gistogramChart);

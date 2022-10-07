@@ -45,25 +45,6 @@ namespace KOP_Forms
             public int count { get; set; }
         }
 
-        private void dataGrivViewModified_Load(object sender, EventArgs e)
-        {
-            MyObject objMy = new MyObject();
-            objMy.count = 20;
-            objMy.name = "Timofey";
-            MyObject objMy2 = new MyObject();
-            objMy2.count = 19;
-            objMy2.name = "Aleksey";
-            ColumnsDataGrid column = new ColumnsDataGrid();
-            column.CountColumn = 2;
-            column.NameColumn = new string[] { "name", "count" };
-            column.Width = new int[] { 80, 50 };
-            column.Visible = new bool[] { true, true };
-            column.PropertiesObject = new string[] { "name", "count" };
-            dataGridViewModified.ConfigColumn(column);
-            dataGridViewModified.AddRow(objMy);
-            dataGridViewModified.AddRow(objMy2);
-        }
-
         private void dataGridViewModified_Load(object sender, EventArgs e)
         {
             MyObject objMy = new MyObject();
@@ -79,6 +60,7 @@ namespace KOP_Forms
             column.Visible = new bool[] { true, true };
             column.PropertiesObject = new string[] { "name", "count" };
             dataGridViewModified.ConfigColumn(column);
+            MyObject[] myObjects = new MyObject[2];
             dataGridViewModified.AddRow(objMy);
             dataGridViewModified.AddRow(objMy2);
         }
@@ -126,10 +108,10 @@ namespace KOP_Forms
                     FileName = fileName,
                     Title = "2 лаба по КОП"
                 },
-                ColumnsWidth = data.getColumnsWidth(3, 2400),
+                ColumnsWidth = data.getColumnsWidth(2, 2400),
                 RowsHeight = data.getRowsHeight(5, 1000),
-                Headers = data.GetHeader(3),
-                PropertiesQueue = data.GetHeader(3),
+                Headers = data.GetHeader(2),
+                PropertiesQueue = data.GetHeader(2),
                 ListData = data.GetTests()
             });
         }
@@ -148,11 +130,11 @@ namespace KOP_Forms
             }
             List<TestData> data = new List<TestData>();
 
-            data.Add(new TestData { name = "Иван", age = 18, kurs = 1 });
-            data.Add(new TestData { name = "Николай", age = 17, kurs = 1 });
-            data.Add(new TestData { name = "Альберт", age = 19, kurs = 2 });
-            data.Add(new TestData { name = "Глеб", age = 20, kurs = 3 });
-            data.Add(new TestData { name = "Антон", age = 23, kurs = 5 });
+            data.Add(new TestData { name = "Иван", value = 18 });
+            data.Add(new TestData { name = "Николай", value = 17 });
+            data.Add(new TestData { name = "Альберт", value = 19 });
+            data.Add(new TestData { name = "Глеб", value = 20 });
+            data.Add(new TestData { name = "Антон", value = 23 });
             LocationLegend legend = new LocationLegend();
             wordGistagram.ReportSaveGistogram(fileName, "Документ с гистограммой", "Студенты", legend, data);
         }

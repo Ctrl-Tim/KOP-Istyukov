@@ -3,7 +3,7 @@
 namespace KOP_Forms
 {
     /// <summary>
-    /// Класс-помощник для настройки конфигурации таблички с настраивыми колонками и строками (WordTableTwo)
+    /// Класс-помощник для настройки конфигурации таблички с настраивыми колонками и строками (WordTableCustom)
     /// </summary>
     public class DataClass
     {
@@ -60,17 +60,14 @@ namespace KOP_Forms
         public List<string> GetHeader(int count)
         {
             List<string> list = new List<string>();
-            if (count > 0 && count < 15)
-                switch ((count % 15))
+            if (count > 0 && count < 10)
+                switch ((count % 10))
                 {
-                    case 3:
-                        list.Add("name");
-                        goto case 2;
                     case 2:
-                        list.Add("age");
+                        list.Add("name");
                         goto case 1;
                     case 1:
-                        list.Add("kurs");
+                        list.Add("value");
                         break;
                     default:
                         break;
@@ -85,11 +82,11 @@ namespace KOP_Forms
 
         public DataClass()
         {
-            testsData.Add(new TestData { name = "Иван", age = 18, kurs = 1 });
-            testsData.Add(new TestData { name = "Николай", age = 17, kurs = 1 });
-            testsData.Add(new TestData { name = "Альберт", age = 19, kurs = 2});
-            testsData.Add(new TestData { name = "Глеб", age = 20, kurs = 3 });
-            testsData.Add(new TestData { name = "Антон", age = 23, kurs = 5 });
+            testsData.Add(new TestData { name = "Иван", value = 18 });
+            testsData.Add(new TestData { name = "Николай", value = 17 });
+            testsData.Add(new TestData { name = "Альберт", value = 19 });
+            testsData.Add(new TestData { name = "Глеб", value = 20 });
+            testsData.Add(new TestData { name = "Антон", value = 23 });
         }
     }
 }
