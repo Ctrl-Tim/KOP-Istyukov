@@ -80,7 +80,7 @@ namespace ComponentsCustom
                         break;
                     }
                 }
-                if (!propIsExist) { throw new Exception("can not find propertie"); };
+                if (!propIsExist) { throw new Exception("Не найдено свойство!"); };
                 object value = dataGridView.SelectedRows[0].Cells[columnIndex].Value;
                 properties.SetValue(objectMy, value);
             }
@@ -97,13 +97,15 @@ namespace ComponentsCustom
         {
             if (objectMy == null)
                 return;
-            int rowId = dataGridView.Rows.Add();
-            var row = dataGridView.Rows[rowId];
+
             var properties = objectMy.GetType().GetProperties();
-            for (int i = 0; i < typeof(T).GetProperties().Length; i++)
+            string[] values = new string[dataGridView.Columns.Count];
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
             {
-                row.Cells[i].Value = properties[i].GetValue(objectMy).ToString();
+                string propName = dataGridView.Columns[i].DataPropertyName.ToString();
+                values[i] = objectMy.GetType().GetProperty(propName).GetValue(objectMy).ToString();
             }
+            dataGridView.Rows.Add(values);
         }
 
         private void DataGrivViewModified_Load(object sender, EventArgs e)
