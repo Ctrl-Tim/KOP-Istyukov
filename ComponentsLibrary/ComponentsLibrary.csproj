@@ -29,13 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RomanovaUnvisualComponents\" />
-    <Folder Include="RomanovaVisualComponents\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.18.0" />
     <PackageReference Include="DocX" Version="2.3.0" />
+    <PackageReference Include="ExcelDna.Interop" Version="15.0.0" />
+    <PackageReference Include="Microsoft.Office.Excel" Version="14.0.4760.1000" />
     <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
   </ItemGroup>
 

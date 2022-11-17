@@ -1,17 +1,8 @@
 ﻿using ComponentsLibrary.MyUnvisualComponents.HelperModels;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using ComponentsLibrary.MyUnvisualComponents.HelperModels;
 using System.Reflection;
 
 namespace ComponentsLibrary.MyUnvisualComponents
