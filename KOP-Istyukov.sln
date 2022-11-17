@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentsCustom", "Compone
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KOP_Forms", "KOP_Forms\KOP_Forms.csproj", "{D192AE8B-0FCA-426C-AB8C-DECDB938028F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentsCustomUnvisual", "ComponentsCustomUnvisual\ComponentsCustomUnvisual.csproj", "{E1E79644-B5F1-474D-9980-A4A61C6DC0F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentsCustomUnvisual", "ComponentsCustomUnvisual\ComponentsCustomUnvisual.csproj", "{E1E79644-B5F1-474D-9980-A4A61C6DC0F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanovaNotVisualComponents", "RomanovaNotVisualComponents\RomanovaNotVisualComponents.csproj", "{BCC43EDF-F0B1-4252-AEF0-46D312EDE1DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanovaVisualComponents", "RomanovaVisualComponents\RomanovaVisualComponents.csproj", "{F63BC70F-8C33-4F11-AA07-B34F52ED24EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryView", "LibraryView\LibraryView.csproj", "{100FC920-D164-4C45-B0C5-422266C64EA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{E1E79644-B5F1-474D-9980-A4A61C6DC0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E79644-B5F1-474D-9980-A4A61C6DC0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1E79644-B5F1-474D-9980-A4A61C6DC0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC43EDF-F0B1-4252-AEF0-46D312EDE1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC43EDF-F0B1-4252-AEF0-46D312EDE1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC43EDF-F0B1-4252-AEF0-46D312EDE1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC43EDF-F0B1-4252-AEF0-46D312EDE1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63BC70F-8C33-4F11-AA07-B34F52ED24EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63BC70F-8C33-4F11-AA07-B34F52ED24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63BC70F-8C33-4F11-AA07-B34F52ED24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63BC70F-8C33-4F11-AA07-B34F52ED24EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100FC920-D164-4C45-B0C5-422266C64EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100FC920-D164-4C45-B0C5-422266C64EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100FC920-D164-4C45-B0C5-422266C64EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100FC920-D164-4C45-B0C5-422266C64EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
