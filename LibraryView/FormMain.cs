@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using PluginsConventionLibrary.Plugins;
+using LibraryBusinessLogic.BusinessLogics;
+using LibraryDatabaseImplement.Models;
+using LibraryContracts.BindingModels;
+using LibraryContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace LibraryView
 {
     public partial class FormMain : Form
     {
-        private readonly Dictionary<string, IPluginsConvention> _plugins;
-        private string _selectedPlugin;
+        private readonly IBookLogic _bookLogic;
 
-        public FormMain()
+        public FormMain(IBookLogic bookLogic)
         {
             InitializeComponent();
-            _plugins = LoadPlugins();
-            _selectedPlugin = string.Empty;
+            _bookLogic = bookLogic;
         }
 
         private Dictionary<string, IPluginsConvention> LoadPlugins()
@@ -28,10 +32,6 @@ namespace LibraryView
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (string.IsNullOrEmpty(_selectedPlugin) || !_plugins.ContainsKey(_selectedPlugin))
-            { 
-                return;
-            }
             if (!e.Control) 
             {
                 return; 
@@ -59,85 +59,86 @@ namespace LibraryView
             }
         }
 
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                var list = _bookLogic.Read(null);
+                if (list != null)
+                {
+                    foreach (var book in list)
+                    {
+                        romanovaListBox.Fill(book);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void AddNewElement()
         {
-            var form = _plugins[_selectedPlugin].GetForm(null);
-            if (form != null && form.ShowDialog() == DialogResult.OK)
+            var form = Program.Container.Resolve<FormBook>();
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                _plugins[_selectedPlugin].ReloadData(); 
+                LoadData();
             }
         }
 
         private void UpdateElement()
-        { 
-            var element = _plugins[_selectedPlugin].GetElement;
-            if (element == null) 
+        {
+            var form = Program.Container.Resolve<FormBook>();
+            form.Id = Convert.ToInt32(romanovaListBox.GetSelectedItem<Book>().Id);
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Нет выбранного элемента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return;
-            }
-            var form = _plugins[_selectedPlugin].GetForm(element); 
-            if (form != null && form.ShowDialog() == DialogResult.OK) 
-            {
-                _plugins[_selectedPlugin].ReloadData(); 
+                LoadData();
             }
         }
 
         private void DeleteElement()
-        { 
-            if (MessageBox.Show("Удалить выбранный элемент", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) 
-            { 
-                return; 
+        {
+            if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(romanovaListBox.GetSelectedItem<Book>().Id);
+                try
+                {
+                    _bookLogic.Delete(new BookBindingModel { Id = id });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                LoadData();
             }
-            var element = _plugins[_selectedPlugin].GetElement; 
-            if (element == null)
-            {
-                MessageBox.Show("Нет выбранного элемента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return; 
-            } 
-            if (_plugins[_selectedPlugin].DeleteElement(element)) 
-            {
-                _plugins[_selectedPlugin].ReloadData(); 
-            } 
         }
 
         private void CreateSimpleDoc()
         {            
-            // TODO узнать где сохранять
-            if (_plugins[_selectedPlugin].CreateSimpleDocument(new PluginsConventionSaveDocument()))  
-            {            
-                MessageBox.Show("Документ сохранен", "Создание документа", MessageBoxButtons.OK, MessageBoxIcon.Information);   
-            }     
-            else   
-            {          
-                MessageBox.Show("Ошибка при создании документа", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);     
-            }  
+
         } 
 
         private void CreateTableDoc()
         {      
-            // TODO узнать где сохранять
-            if (_plugins[_selectedPlugin].CreateTableDocument(new PluginsConventionSaveDocument()))        
-            { 
-                MessageBox.Show("Документ сохранен", "Создание документа", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }      
-            else 
-            {
-                MessageBox.Show("Ошибка при создании документа", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
 
         private void CreateChartDoc()
         {       
-            // TODO узнать где сохранять
-            if (_plugins[_selectedPlugin].CreateChartDocument(new PluginsConventionSaveDocument()))   
-            {           
-                MessageBox.Show("Документ сохранен", "Создание документа", MessageBoxButtons.OK, MessageBoxIcon.Information);   
-            }      
-            else    
-            {         
-                MessageBox.Show("Ошибка при создании документа", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);    
-            }   
+
+        }
+
+        private void ShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormShape>();
+            form.ShowDialog();
         }
 
         private void AddElementToolStripMenuItem_Click(object sender, EventArgs e) => AddNewElement();

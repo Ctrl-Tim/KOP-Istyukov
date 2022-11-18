@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿//using System.Windows.Forms;
 
 namespace PluginsConventionLibrary.Plugins
 {
@@ -12,7 +12,7 @@ namespace PluginsConventionLibrary.Plugins
         /// <summary>     
         /// Получение контрола для вывода набора данных      
         /// </summary>   
-        UserControl GetControl { get; }
+        //UserControl GetControl { get; }
 
         /// <summary>         
         /// Получение элемента, выбранного в контроле    
@@ -24,7 +24,7 @@ namespace PluginsConventionLibrary.Plugins
         /// </summary>         
         /// <param name="element"></param>        
         /// <returns></returns>       
-        Form GetForm(PluginsConventionElement element);
+        //Form GetForm(PluginsConventionElement element);
 
         /// <summary>        
         /// Удаление элемента       
