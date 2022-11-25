@@ -33,20 +33,27 @@
             // 
             // listBox
             // 
+            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 20;
-            this.listBox.Location = new System.Drawing.Point(16, 21);
+            this.listBox.HorizontalScrollbar = true;
+            this.listBox.IntegralHeight = false;
+            this.listBox.ItemHeight = 15;
+            this.listBox.Location = new System.Drawing.Point(14, 16);
+            this.listBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(281, 104);
+            this.listBox.Size = new System.Drawing.Size(246, 79);
             this.listBox.TabIndex = 0;
             // 
             // RomanovaListBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listBox);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RomanovaListBox";
-            this.Size = new System.Drawing.Size(315, 150);
+            this.Size = new System.Drawing.Size(276, 112);
             this.ResumeLayout(false);
 
         }
