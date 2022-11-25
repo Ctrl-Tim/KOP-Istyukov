@@ -1,13 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Unity" Version="5.11.10" />
+		<PackageReference Include="Unity.Container" Version="5.11.11" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="7.0.0" />
+    </ItemGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\ComponentsLibrary\ComponentsLibrary.csproj" />
+    <ProjectReference Include="..\LibraryBusinessLogic\LibraryBusinessLogic.csproj" />
+    <ProjectReference Include="..\LibraryContracts\LibraryContracts.csproj" />
+    <ProjectReference Include="..\LibraryDatabaseImplement\LibraryDatabaseImplement.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
-    <Folder Include="Forms\" />
+    <Compile Update="Forms\FormBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormShape.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

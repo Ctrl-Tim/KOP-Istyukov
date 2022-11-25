@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PluginsConventionLibrary.Plugins
+﻿namespace PluginsConventionLibrary.Plugins
 {
     public class PluginsConventionElement
     {
