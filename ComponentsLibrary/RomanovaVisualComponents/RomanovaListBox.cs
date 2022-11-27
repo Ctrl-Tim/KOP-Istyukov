@@ -58,9 +58,9 @@ namespace ComponentsLibrary.RomanovaVisualComponents
             Type type = typeof(T);
             PropertyInfo[] properties = type.GetProperties();
 
-            foreach (var n in names)
+            foreach (var p in properties)
             {
-                foreach (var p in properties)
+                foreach (var n in names)
                 {
                     if (p.Name.Equals(n))
                     {
@@ -81,11 +81,6 @@ namespace ComponentsLibrary.RomanovaVisualComponents
         {
             listBox.Items.Add(FillString(obj));
             listBox.Refresh();
-        }
-
-        public void ClearAll()
-        {
-            listBox.Items.Clear();
         }
 
         public T GetSelectedItem<T>() where T : class, new()
