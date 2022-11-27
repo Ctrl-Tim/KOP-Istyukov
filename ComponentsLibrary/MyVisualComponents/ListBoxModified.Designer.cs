@@ -36,7 +36,7 @@
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 15;
             this.listBox.Location = new System.Drawing.Point(2, 2);
-            this.listBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox.Margin = new System.Windows.Forms.Padding(2);
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(100, 34);
             this.listBox.TabIndex = 0;
@@ -47,7 +47,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ListBoxModified";
             this.Size = new System.Drawing.Size(117, 112);
             this.Load += new System.EventHandler(this.ListBoxModified_Load);

@@ -2,45 +2,88 @@
 {
     public partial class SevaTextBox : UserControl
     {
-        public int? MaxLenght { get; set; }
-        public int? MinLenght { get; set; }
-        private string text { get; set; }
-        private string Success = "Верно!";
-        private string Wrong = "Не верно!";
+        public int? startRange;
+        public int? endRange;
         private string error = string.Empty;
+        private bool flagStart = false;
+        private bool flagEnd = false;
+        private event EventHandler TextChange;
         public SevaTextBox()
         {
             InitializeComponent();
-            textBox1.TextChanged += (sender, e) => _event?.Invoke(sender, e);
+            textBox1.TextChanged += (sender, e) => TextChange?.Invoke(sender, e);
         }
-        private event EventHandler _event;
-        public event EventHandler EnterTextChanged
-        {
-            add
-            {
-                _event += value;
-            }
-            remove
-            {
-                _event -= value;
-            }
-        }
-        public string SelectText
+        public string Txt
         {
             get
             {
-                if ((MaxLenght != null && MinLenght != null) && textBox1.Text.Length > MinLenght && textBox1.Text.Length < MaxLenght)
-                        return textBox1.Text;
+                if (IsCorrect())
+                {
+                    return textBox1.Text;
+                }
                 else
                 {
-                    MessageBox.Show("Не соответствует диапозону", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error = "Ошибка диапазона";
                     return null;
+                }
+
+            }
+            set
+            {
+                if (!IsCorrect()) textBox1.Text = value;
+            }
+        }
+
+        private bool IsCorrect()
+        {
+            return textBox1.Text.Length >= StartRange && textBox1.Text.Length <= EndRange;
+        }
+
+        public int StartRange
+        {
+
+            get
+            {
+                if (startRange == null)
+                {
+                    if (!flagStart)
+                    {
+                        MessageBox.Show("StartRange не определен", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        flagStart = true;
+                    }
+                    return 0;
+                }
+                else
+                {
+                    return (int)startRange;
                 }
             }
             set
             {
-                if ((MaxLenght != null && MinLenght != null) && value.Length > MinLenght && value.Length < MaxLenght)
-                    textBox1.Text = value;
+                startRange = value;
+            }
+        }
+        public int EndRange
+        {
+            get
+            {
+                if (endRange == null)
+                {
+                    if (!flagEnd)
+                    {
+                        MessageBox.Show("EndRange не определен", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        flagEnd = true;
+                    }
+                    return 0;
+                }
+                else
+                {
+                    return (int)endRange;
+                }
+            }
+            set
+            {
+                endRange = value;
             }
         }
     }

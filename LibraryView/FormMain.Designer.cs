@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ControlsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,19 +41,22 @@
             this.TableDocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChartDocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.romanovaListBox = new ComponentsLibrary.RomanovaVisualComponents.RomanovaListBox();
-            this.ShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordTablesContext = new ComponentsLibrary.MyUnvisualComponents.WordTablesContext(this.components);
+            this.tableToPDF = new ComponentsLibrary.BasharinUnvisualComponents.TableToPDF(this.components);
+            this.diagramExcel = new ComponentsLibrary.RomanovaUnvisualComponents.RomanovaExcelDiagram(this.components);
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
+            this.menuStrip.AutoSize = false;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ControlsStripMenuItem,
             this.ActionsToolStripMenuItem,
             this.DocsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip.Size = new System.Drawing.Size(920, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "Меню";
             // 
@@ -62,6 +67,13 @@
             this.ControlsStripMenuItem.Name = "ControlsStripMenuItem";
             this.ControlsStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.ControlsStripMenuItem.Text = "Справочники";
+            // 
+            // ShapesToolStripMenuItem
+            // 
+            this.ShapesToolStripMenuItem.Name = "ShapesToolStripMenuItem";
+            this.ShapesToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.ShapesToolStripMenuItem.Text = "Формы";
+            this.ShapesToolStripMenuItem.Click += new System.EventHandler(this.ShapesToolStripMenuItem_Click);
             // 
             // ActionsToolStripMenuItem
             // 
@@ -77,7 +89,7 @@
             // 
             this.AddElementToolStripMenuItem.Name = "AddElementToolStripMenuItem";
             this.AddElementToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.AddElementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AddElementToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.AddElementToolStripMenuItem.Text = "Добавить";
             this.AddElementToolStripMenuItem.Click += new System.EventHandler(this.AddElementToolStripMenuItem_Click);
             // 
@@ -85,7 +97,7 @@
             // 
             this.UpdElementToolStripMenuItem.Name = "UpdElementToolStripMenuItem";
             this.UpdElementToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.UpdElementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.UpdElementToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.UpdElementToolStripMenuItem.Text = "Изменить";
             this.UpdElementToolStripMenuItem.Click += new System.EventHandler(this.UpdElementToolStripMenuItem_Click);
             // 
@@ -93,7 +105,7 @@
             // 
             this.DelElementToolStripMenuItem.Name = "DelElementToolStripMenuItem";
             this.DelElementToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.DelElementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DelElementToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.DelElementToolStripMenuItem.Text = "Удалить";
             this.DelElementToolStripMenuItem.Click += new System.EventHandler(this.DelElementToolStripMenuItem_Click);
             // 
@@ -113,7 +125,7 @@
             this.SimpleDocToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.SimpleDocToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.SimpleDocToolStripMenuItem.Text = "Простой документ";
-            this.SimpleDocToolStripMenuItem.Click += new System.EventHandler(this.SimpleDocToolStripMenuItem_Click);
+            this.SimpleDocToolStripMenuItem.Click += new System.EventHandler(this.WordDocToolStripMenuItem_Click);
             // 
             // TableDocToolStripMenuItem
             // 
@@ -121,7 +133,7 @@
             this.TableDocToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.TableDocToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.TableDocToolStripMenuItem.Text = "Документ с таблицой";
-            this.TableDocToolStripMenuItem.Click += new System.EventHandler(this.TableDocToolStripMenuItem_Click);
+            this.TableDocToolStripMenuItem.Click += new System.EventHandler(this.PdfDocToolStripMenuItem_Click);
             // 
             // ChartDocToolStripMenuItem
             // 
@@ -129,7 +141,7 @@
             this.ChartDocToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.ChartDocToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.ChartDocToolStripMenuItem.Text = "Диаграмма";
-            this.ChartDocToolStripMenuItem.Click += new System.EventHandler(this.ChartDocToolStripMenuItem_Click);
+            this.ChartDocToolStripMenuItem.Click += new System.EventHandler(this.ExcelDocToolStripMenuItem_Click);
             // 
             // romanovaListBox
             // 
@@ -137,34 +149,29 @@
             this.romanovaListBox.Location = new System.Drawing.Point(12, 35);
             this.romanovaListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.romanovaListBox.Name = "romanovaListBox";
-            this.romanovaListBox.Size = new System.Drawing.Size(274, 106);
+            this.romanovaListBox.Size = new System.Drawing.Size(908, 186);
             this.romanovaListBox.TabIndex = 1;
             // 
-            // ShapesToolStripMenuItem
+            // tableToPDF
             // 
-            this.ShapesToolStripMenuItem.Name = "ShapesToolStripMenuItem";
-            this.ShapesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ShapesToolStripMenuItem.Text = "Формы";
-            this.ShapesToolStripMenuItem.Click += new System.EventHandler(this.ShapesToolStripMenuItem_Click);
+            this.tableToPDF.Order = null;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(920, 216);
             this.Controls.Add(this.romanovaListBox);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная форма";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
             }
 
@@ -182,5 +189,8 @@
             private System.Windows.Forms.ToolStripMenuItem DelElementToolStripMenuItem;
         private ComponentsLibrary.RomanovaVisualComponents.RomanovaListBox romanovaListBox;
         private ToolStripMenuItem ShapesToolStripMenuItem;
+        private ComponentsLibrary.MyUnvisualComponents.WordTablesContext wordTablesContext;
+        private ComponentsLibrary.BasharinUnvisualComponents.TableToPDF tableToPDF;
+        private ComponentsLibrary.RomanovaUnvisualComponents.RomanovaExcelDiagram diagramExcel;
     }
 }
