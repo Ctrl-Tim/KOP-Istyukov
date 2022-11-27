@@ -26,8 +26,6 @@ namespace LibraryView
             InitializeComponent();
             _logic = logic;
             _logicS = logicS;
-            textBoxAnnotation.startRange = 100;
-            textBoxAnnotation.endRange = 200;
         }
 
         private void FormBook_Load(object sender, EventArgs e)
@@ -48,8 +46,7 @@ namespace LibraryView
                     if (view != null)
                     {
                         textBoxTitle.Text = view.Title;
-                        listBoxModifiedShape.ValueList = view.Shape;
-                        textBoxAnnotation.Txt = view.Annotation;
+                        sevaTextBoxAnnotation.SelectText = view.Annotation;
                         textBoxReader1.Text = view.Reader1;
                         textBoxReader2.Text = view.Reader2;
                         textBoxReader3.Text = view.Reader3;
@@ -77,7 +74,7 @@ namespace LibraryView
                 MessageBox.Show("Выберите форму", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (textBoxAnnotation.Txt == null)
+            if (string.IsNullOrEmpty(sevaTextBoxAnnotation.SelectText))
             {
                 MessageBox.Show("Заполните аннотацию", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -97,7 +94,6 @@ namespace LibraryView
                     Id = id,
                     Title = textBoxTitle.Text,
                     Shape = listBoxModifiedShape.ValueList.ToString(),
-                    Annotation = textBoxAnnotation.Txt,
                     Reader1 = textBoxReader1.Text,
                     Reader2 = textBoxReader2.Text,
                     Reader3 = textBoxReader3.Text,
