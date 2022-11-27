@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ComponentsLibrary.BasharinVisualComponents.SevaTextBox sevaTextBoxAnnotation;
             this.labelAnnotation = new System.Windows.Forms.Label();
             this.labelShape = new System.Windows.Forms.Label();
             this.labelReader1 = new System.Windows.Forms.Label();
@@ -48,22 +47,8 @@
             this.textBoxReader6 = new System.Windows.Forms.TextBox();
             this.labelReader6 = new System.Windows.Forms.Label();
             this.listBoxModifiedShape = new ComponentsLibrary.MyVisualComponents.ListBoxModified();
-            sevaTextBoxAnnotation = new ComponentsLibrary.BasharinVisualComponents.SevaTextBox();
+            this.textBoxAnnotation = new ComponentsLibrary.BasharinVisualComponents.SevaTextBox();
             this.SuspendLayout();
-            // 
-            // sevaTextBoxAnnotation
-            // 
-            sevaTextBoxAnnotation.AllowDrop = true;
-            sevaTextBoxAnnotation.Enabled = false;
-            sevaTextBoxAnnotation.Location = new System.Drawing.Point(273, 29);
-            sevaTextBoxAnnotation.MaxLenght = 200;
-            sevaTextBoxAnnotation.MinLenght = 100;
-            sevaTextBoxAnnotation.Name = "sevaTextBoxAnnotation";
-            sevaTextBoxAnnotation.SelectText = "Необходимость аннотации обусловлена большим выбором книг. Человек не в состоянии " +
-    "прочесть всю литературу. Аннотация ускоряет и упрощает поиск информации, позволя" +
-    "я читателю быстро найти нужную книгу.";
-            sevaTextBoxAnnotation.Size = new System.Drawing.Size(242, 32);
-            sevaTextBoxAnnotation.TabIndex = 26;
             // 
             // labelAnnotation
             // 
@@ -242,12 +227,23 @@
             this.listBoxModifiedShape.TabIndex = 27;
             this.listBoxModifiedShape.ValueList = "";
             // 
+            // textBoxAnnotation
+            // 
+            this.textBoxAnnotation.EndRange = 200;
+            this.textBoxAnnotation.Location = new System.Drawing.Point(273, 29);
+            this.textBoxAnnotation.MaximumSize = new System.Drawing.Size(500, 20);
+            this.textBoxAnnotation.Name = "textBoxAnnotation";
+            this.textBoxAnnotation.Size = new System.Drawing.Size(242, 20);
+            this.textBoxAnnotation.StartRange = 100;
+            this.textBoxAnnotation.TabIndex = 28;
+            this.textBoxAnnotation.Txt = null;
+            // 
             // FormBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 238);
-            this.Controls.Add(sevaTextBoxAnnotation);
+            this.Controls.Add(this.textBoxAnnotation);
             this.Controls.Add(this.textBoxReader6);
             this.Controls.Add(this.labelReader6);
             this.Controls.Add(this.textBoxReader5);
@@ -298,7 +294,7 @@
         private Label labelReader5;
         private TextBox textBoxReader6;
         private Label labelReader6;
-        private ComponentsLibrary.BasharinVisualComponents.SevaTextBox sevaTextBoxAnnotation;
         private ComponentsLibrary.MyVisualComponents.ListBoxModified listBoxModifiedShape;
+        private ComponentsLibrary.BasharinVisualComponents.SevaTextBox textBoxAnnotation;
     }
 }

@@ -89,10 +89,10 @@ namespace ComponentsLibrary.MyUnvisualComponents
                     table.AppendChild<TableProperties>(props);
                     TableRow tr = new TableRow();
                     TableCell tc = new TableCell();
-                    for (var i = 0; i < tabl.GetLength(1); i++)
+                    for (var i = 0; i < tabl.GetLength(0); i++)
                     {
                         tr = new TableRow();
-                        for (var j = 0; j < tabl.GetLength(0); j++)
+                        for (var j = 0; j < tabl.GetLength(1); j++)
                         {
                             tc = new TableCell();
                             tc.Append(new Paragraph(new Run(new Text(tabl[i, j].ToString()))));
