@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.wordTablesContext = new ComponentsLibrary.MyUnvisualComponents.WordTablesContext(this.components);
+            this.tableToPDF = new ComponentsLibrary.BasharinUnvisualComponents.TableToPDF(this.components);
+            this.diagramExcel = new ComponentsLibrary.RomanovaUnvisualComponents.RomanovaExcelDiagram(this.components);
+            this.panelControl = new System.Windows.Forms.Panel();
             this.ControlsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,40 +42,27 @@
             this.SimpleDocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TableDocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChartDocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.romanovaListBox = new ComponentsLibrary.RomanovaVisualComponents.RomanovaListBox();
-            this.wordTablesContext = new ComponentsLibrary.MyUnvisualComponents.WordTablesContext(this.components);
-            this.tableToPDF = new ComponentsLibrary.BasharinUnvisualComponents.TableToPDF(this.components);
-            this.diagramExcel = new ComponentsLibrary.RomanovaUnvisualComponents.RomanovaExcelDiagram(this.components);
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip
+            // tableToPDF
             // 
-            this.menuStrip.AutoSize = false;
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ControlsStripMenuItem,
-            this.ActionsToolStripMenuItem,
-            this.DocsToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(920, 24);
-            this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "Меню";
+            this.tableToPDF.Order = null;
+            // 
+            // panelControl
+            // 
+            this.panelControl.BackColor = System.Drawing.SystemColors.Info;
+            this.panelControl.Location = new System.Drawing.Point(12, 27);
+            this.panelControl.Name = "panelControl";
+            this.panelControl.Size = new System.Drawing.Size(896, 177);
+            this.panelControl.TabIndex = 2;
             // 
             // ControlsStripMenuItem
             // 
-            this.ControlsStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShapesToolStripMenuItem});
             this.ControlsStripMenuItem.Name = "ControlsStripMenuItem";
             this.ControlsStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.ControlsStripMenuItem.Text = "Справочники";
-            // 
-            // ShapesToolStripMenuItem
-            // 
-            this.ShapesToolStripMenuItem.Name = "ShapesToolStripMenuItem";
-            this.ShapesToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.ShapesToolStripMenuItem.Text = "Формы";
-            this.ShapesToolStripMenuItem.Click += new System.EventHandler(this.ShapesToolStripMenuItem_Click);
             // 
             // ActionsToolStripMenuItem
             // 
@@ -143,31 +132,30 @@
             this.ChartDocToolStripMenuItem.Text = "Диаграмма";
             this.ChartDocToolStripMenuItem.Click += new System.EventHandler(this.ExcelDocToolStripMenuItem_Click);
             // 
-            // romanovaListBox
+            // menuStrip
             // 
-            this.romanovaListBox.index = -1;
-            this.romanovaListBox.Location = new System.Drawing.Point(12, 35);
-            this.romanovaListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.romanovaListBox.Name = "romanovaListBox";
-            this.romanovaListBox.Size = new System.Drawing.Size(908, 186);
-            this.romanovaListBox.TabIndex = 1;
-            // 
-            // tableToPDF
-            // 
-            this.tableToPDF.Order = null;
+            this.menuStrip.AutoSize = false;
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ControlsStripMenuItem,
+            this.ActionsToolStripMenuItem,
+            this.DocsToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(920, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "Меню";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 216);
-            this.Controls.Add(this.romanovaListBox);
+            this.Controls.Add(this.panelControl);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная форма";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -176,21 +164,19 @@
             }
 
             #endregion
-
-            private System.Windows.Forms.MenuStrip menuStrip;
-            private System.Windows.Forms.ToolStripMenuItem ControlsStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem DocsToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem SimpleDocToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem TableDocToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem ChartDocToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem ActionsToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem AddElementToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem UpdElementToolStripMenuItem;
-            private System.Windows.Forms.ToolStripMenuItem DelElementToolStripMenuItem;
-        private ComponentsLibrary.RomanovaVisualComponents.RomanovaListBox romanovaListBox;
-        private ToolStripMenuItem ShapesToolStripMenuItem;
         private ComponentsLibrary.MyUnvisualComponents.WordTablesContext wordTablesContext;
         private ComponentsLibrary.BasharinUnvisualComponents.TableToPDF tableToPDF;
         private ComponentsLibrary.RomanovaUnvisualComponents.RomanovaExcelDiagram diagramExcel;
+        private Panel panelControl;
+        private ToolStripMenuItem ControlsStripMenuItem;
+        private ToolStripMenuItem ActionsToolStripMenuItem;
+        private ToolStripMenuItem AddElementToolStripMenuItem;
+        private ToolStripMenuItem UpdElementToolStripMenuItem;
+        private ToolStripMenuItem DelElementToolStripMenuItem;
+        private ToolStripMenuItem DocsToolStripMenuItem;
+        private ToolStripMenuItem SimpleDocToolStripMenuItem;
+        private ToolStripMenuItem TableDocToolStripMenuItem;
+        private ToolStripMenuItem ChartDocToolStripMenuItem;
+        private MenuStrip menuStrip;
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibraryContracts\LibraryContracts.csproj" />
+    <ProjectReference Include="..\LibraryDatabaseImplement\LibraryDatabaseImplement.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,12 +2,17 @@
 using LibraryContracts.StorageContracts;
 using LibraryContracts.BindingModels;
 using LibraryContracts.ViewModels;
+using LibraryDatabaseImplement.Implements;
 
 namespace LibraryBusinessLogic.BusinessLogics
 {
     public class ShapeLogic : IShapeLogic
     {
         private readonly IShapeStorage _shapeStorage;
+        public ShapeLogic() 
+        {
+            _shapeStorage = new ShapeStorage();
+        }
 
         public ShapeLogic(IShapeStorage shapeStorage)
         {

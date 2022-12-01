@@ -2,12 +2,18 @@
 using LibraryContracts.StorageContracts;
 using LibraryContracts.BindingModels;
 using LibraryContracts.ViewModels;
+using LibraryDatabaseImplement.Implements;
 
 namespace LibraryBusinessLogic.BusinessLogics
 {
     public class BookLogic : IBookLogic
     {
         private readonly IBookStorage _bookStorage;
+
+        public BookLogic()
+        {
+            _bookStorage = new BookStorage();
+        }
 
         public BookLogic(IBookStorage bookStorage)
         {

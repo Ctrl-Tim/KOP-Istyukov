@@ -1,108 +1,79 @@
 ﻿using PluginsConventionLibrary.Plugins;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LibraryContracts.BindingModels;
 using LibraryContracts.BusinessLogicsContracts;
-using LibraryContracts.ViewModels;
-using PluginsConventionLibrary.Plugins;
 using PluginsConventionLibrary.Forms;
 using ComponentsLibrary.MyUnvisualComponents;
 using ComponentsLibrary.BasharinUnvisualComponents;
 using ComponentsLibrary.RomanovaUnvisualComponents;
+using ComponentsLibrary.RomanovaVisualComponents;
+using LibraryBusinessLogic.BusinessLogics;
+using LibraryDatabaseImplement.Implements;
 
 namespace PluginsConventionLibrary.MyPlugin
 {
-    Export(typeof(IPluginsConvention))]
+    [Export(typeof(IPluginsConvention))]
     public class MainPluginConvention : IPluginsConvention
     {
-        private ControlDataTableTable dataTableView;
+        private RomanovaListBox romanovaListBox;
         private readonly IBookLogic _bookLogic;
         private readonly IShapeLogic _shapeLogic;
-        private List<DataTableColumnConfig> config;
 
         public MainPluginConvention()
         {
-            dataTableView = new ControlDataTableTable();
+            _bookLogic = new BookLogic();
+            _shapeLogic = new ShapeLogic();
 
+            romanovaListBox = new RomanovaListBox();
             var menu = new ContextMenuStrip();
-            var bookMenuItem = new ToolStripMenuItem("Книги");
-            menu.Items.Add(bookMenuItem);
-            bookMenuItem.Click += (sender, e) =>
+            var shapeMenuItem = new ToolStripMenuItem("Формы");
+            menu.Items.Add(shapeMenuItem);
+            shapeMenuItem.Click += (sender, e) =>
             {
-                var formBook = new FormBook(_bookLogic, _shapeLogic);
-                formBook.ShowDialog();
+                var formShape = new FormShape(_shapeLogic);
+                formShape.ShowDialog();
             };
-            dataTableView.ContextMenuStrip = menu;
-
-            config = new List<DataTableColumnConfig>
-            {
-                new DataTableColumnConfig
-                {
-                    ColumnHeader = "Id",
-                    PropertyName = "Id",
-                    Visible = false,
-                },
-                new DataTableColumnConfig
-                {
-                    ColumnHeader = "ФИО покупателя",
-                    PropertyName = "CustomerFIO",
-                    Visible = true,
-                    Width = 120
-                },
-                new DataTableColumnConfig
-                {
-                    ColumnHeader = "Товар",
-                    PropertyName = "Product",
-                    Visible = true,
-                    Width = 140
-                },
-                new DataTableColumnConfig
-                {
-                    ColumnHeader = "Почта",
-                    PropertyName = "Mail",
-                    Visible = true,
-                    Width = 200
-                }
-            };
-            dataTableView.LoadColumns(config);
-            _bookLogic = new IBookLogic();
+            romanovaListBox.ContextMenuStrip = menu;
             ReloadData();
         }
 
-        public string PluginName => "Книги";
-
-        public UserControl GetControl => dataTableView;
-
-        public PluginsConventionElement GetElement => dataTableView.GetSelectedObject<PluginsConventionElement>();
-
-        private Dictionary<string, List<(int, double)>> PdfData()
+        /// Название плагина
+        string IPluginsConvention.PluginName => PluginName();
+        public string PluginName()
         {
-            var list = _bookLogic.Read(null);
-            var list_book = new Dictionary<string, int>();
-            foreach (var item in list)
+            return "Books";
+        }
+
+        public UserControl GetControl => romanovaListBox;
+
+        PluginsConventionElement IPluginsConvention.GetElement => GetElement();
+
+        public PluginsConventionElement GetElement()
+        {
+            var book = romanovaListBox.GetSelectedItem<MainPluginConventionElement>(); ;
+            MainPluginConventionElement element = null;
+            if (romanovaListBox != null)
             {
-                if (list_book.ContainsKey(item.Product))
-                    list_book[item.Product]++;
-                else
+                element = new MainPluginConventionElement
                 {
-                    list_book.Add(item.Product, 1);
-                }
+                    Id = book.Id,
+                    Title = book.Title,
+                    Shape = book.Shape,
+                    Annotation = book.Annotation,
+                    Reader1 = book.Reader1,
+                    Reader2 = book.Reader2,
+                    Reader3 = book.Reader3,
+                    Reader4 = book.Reader4,
+                    Reader5 = book.Reader5,
+                    Reader6 = book.Reader6
+                };
             }
-            var list_changed = new Dictionary<string, List<(int, double)>>();
-            foreach (var item in list_book)
-            {
-                list_changed.Add(item.Key, new List<(int, double)> { (1, item.Value) });
-            }
-            return list_changed;
+            return (new PluginsConventionElement { Id = element.Id });
         }
 
         public Form GetForm(PluginsConventionElement element)
         {
-            var formOrder = new FormBook();
+            var formOrder = new FormBook(_bookLogic, _shapeLogic);
             if (element != null)
             {
                 formOrder.Id = element.Id;
@@ -114,7 +85,7 @@ namespace PluginsConventionLibrary.MyPlugin
         {
             try
             {
-                _bookLogic.Delete(new LogicDB.BindingModels.OrderBindingModel { Id = element.Id });
+                _bookLogic.Delete(new BookBindingModel { Id = element.Id });
             }
             catch (Exception ex)
             {
@@ -126,11 +97,15 @@ namespace PluginsConventionLibrary.MyPlugin
 
         public void ReloadData()
         {
-            dataTableView.Clear();
-            var data = _bookLogic.Read(null);
-            if (data.Count > 0)
+            romanovaListBox.ClearAll();
+            romanovaListBox.LayoutString("Форма {Shape} Идентификатор {Id} Название {Title} Аннотация {Annotation}", '{', '}'); ;
+            var list = _bookLogic.Read(null);
+            if (list != null)
             {
-                dataTableView.AddTable(data);
+                foreach (var book in list)
+                {
+                    romanovaListBox.Fill(book);
+                }
             }
         }
 
